@@ -31,7 +31,6 @@ def validate_data(dat):
     except EmailNotValidError:
         errors.append("error: Email is not valid")
 
-
     return errors
 
 
