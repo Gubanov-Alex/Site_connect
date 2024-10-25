@@ -7,11 +7,7 @@ from email_validator import validate_email, EmailNotValidError
 
 app =Flask(__name__)
 
-# scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-credentials = ServiceAccountCredentials.from_json_keyfile_name('test01.json', scope)
-client = gspread.authorize(credentials)
-sheet = client.open("test01").sheet1
+
 
 def validate_data(dat):
     errors = []
@@ -32,7 +28,6 @@ def validate_data(dat):
         errors.append("error: Email is not valid")
 
     return errors
-
 
 
 @app.route('/submit', methods=['POST'])
