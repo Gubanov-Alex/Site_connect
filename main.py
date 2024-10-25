@@ -12,6 +12,13 @@ load_dotenv()
 
 # Getting the path to the JSON file from the environment variable
 json_keyfile_path = os.getenv('GOOGLE_SHEETS_CREDS')
+print(f"GOOGLE_SHEETS_CREDS path: {json_keyfile_path}")
+
+if json_keyfile_path is None:
+    raise RuntimeError("Environment variable 'GOOGLE_SHEETS_CREDS' is not set")
+
+if not os.path.isfile(json_keyfile_path):
+    raise FileNotFoundError(f"File'{json_keyfile_path}' not found")
 
 if not json_keyfile_path:
     raise ValueError(
@@ -25,11 +32,10 @@ sheet_name = os.getenv('GOOGLE_SHEET_NAME', 'test01')
 app = Flask(__name__)
 
 # Set up Google Sheets client scope and authorization
-# scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']  # scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_keyfile_path, scope)
 client = gspread.authorize(credentials)
-# sheet = client.open("test01").sheet1
+sheet = client.open("test01").sheet1
 
 
 try:
