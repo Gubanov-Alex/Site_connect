@@ -33,6 +33,7 @@ def validate_data(dat):
 
     return errors
 
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     data = request.json
