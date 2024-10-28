@@ -4,4 +4,4 @@ Connecting a guest form for the site
 
 1)Working programm Paycharm
 
-2)Checking program Postman
+2)Checking with program Postman
